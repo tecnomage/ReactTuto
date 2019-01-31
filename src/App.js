@@ -13,7 +13,6 @@ class MyProvider extends Component {
                   cool: true};
   }  
 
-
   componentDidMount(){
     this.setState({
       name: 'Wes',
@@ -30,6 +29,7 @@ class MyProvider extends Component {
     });
   }
 
+    
 
   render() {
     return (
@@ -38,9 +38,15 @@ class MyProvider extends Component {
         growAYearOlder: () => this.setState({
           age: this.state.age + 10
         }),
-        changeName: () => this.setState({
-          name: this.state.name = 'Seu nome Mudou'
-        })
+        // changeName: () => {
+        //    this.setState({
+        //       if(this.state.cool===false){
+        //         return name: this.state.name = 'Seu nome Mudou'
+        //       }
+        // })},
+       
+        teste : (e, o) => console.log(e + o)
+         
       }}>
         {this.props.children}
       </MyContext.Provider>
@@ -50,6 +56,7 @@ class MyProvider extends Component {
 
 const Family = (props) => (
   <div className="family">
+    {console.log(props)}
     <Person />
   </div>
 )
@@ -63,8 +70,9 @@ class Person extends Component {
             <React.Fragment>
               <p>Age: {context.state.age}</p>
               <p>Name: {context.state.name}</p>
-              <button onClick={context.growAYearOlder}>🍰🍥🎂</button><br></br>
+              <button onClick={context.growAYearOlder}><span>🍰🍥🎂</span></button><br></br>
               <button onClick={context.changeName}>Mude de nome</button>
+              <a onMouseOver={context.teste('oiiii', ' viniiiii')}> teste de funcao</a>
             </React.Fragment>
           )}
         </MyContext.Consumer>
