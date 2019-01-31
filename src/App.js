@@ -11,7 +11,9 @@ class MyProvider extends Component {
     this.state = {name: 'Wes',
                   age: 100,
                   cool: true};
-  }  
+  
+  this.compara = this.compara.bind(this)
+                }  
 
   componentDidMount(){
     this.setState({
@@ -19,7 +21,7 @@ class MyProvider extends Component {
       age: 100,
       cool: true
     })
-    
+        
   }
 
   componentWillUnmount() {
@@ -29,7 +31,8 @@ class MyProvider extends Component {
     });
   }
 
-    
+  // comparaValores((a,b)=> 
+  //       a>b);
 
   render() {
     return (
@@ -38,12 +41,11 @@ class MyProvider extends Component {
         growAYearOlder: () => this.setState({
           age: this.state.age + 10
         }),
-        // changeName: () => {
-        //    this.setState({
-        //       if(this.state.cool===false){
-        //         return name: this.state.name = 'Seu nome Mudou'
-        //       }
-        // })},
+        changeName: (a,b) => {
+           this.compara(a,b) && this.setState({
+                       name: this.state.name = 'Seu nome Mudou'
+              }
+        )},
        
         teste : (e, o) => console.log(e + o)
          
@@ -62,6 +64,9 @@ const Family = (props) => (
 )
 
 class Person extends Component {
+
+ 
+ 
   render() {
     return (
       <div className="person">
@@ -71,7 +76,7 @@ class Person extends Component {
               <p>Age: {context.state.age}</p>
               <p>Name: {context.state.name}</p>
               <button onClick={context.growAYearOlder}><span>🍰🍥🎂</span></button><br></br>
-              <button onClick={context.changeName}>Mude de nome</button>
+              <button onClick={context.changeName.bind(this,(10,4))}>Mude de nome</button>
               <a onMouseOver={context.teste('oiiii', ' viniiiii')}> teste de funcao</a>
             </React.Fragment>
           )}
