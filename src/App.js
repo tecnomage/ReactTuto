@@ -30,7 +30,9 @@ class MyProvider extends Component {
                   cool: false
     });
   }
-
+  //https://reactjs.org/docs/composition-vs-inheritance.html
+  //Updating Context from a Nested Component
+  //tentar colocar o metodo depois do render
   // comparaValores((a,b)=> 
   //       a>b);
 
