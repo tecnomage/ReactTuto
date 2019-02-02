@@ -5,36 +5,35 @@ const MyContext = React.createContext();
 
 // Then create a provider Component
 class MyProvider extends Component {
-  
+
   constructor(props) {
     super(props);
-    this.state = {name: 'Wes',
-                  age: 100,
-                  cool: true};
-  
-  this.compara = this.compara.bind(this)
-                }  
+    this.state = {
+      name: 'Wes',
+      age: 100,
+      cool: true
+    };
 
-  componentDidMount(){
+    this.compara = this.compara.bind(this)
+  }
+
+  componentDidMount() {
     this.setState({
       name: 'Wes',
       age: 100,
       cool: true
     })
-        
+
   }
 
   componentWillUnmount() {
-    this.setState({name: '',
-                  age: 0,
-                  cool: false
+    this.setState({
+      name: '',
+      age: 0,
+      cool: false,
+      controler: false
     });
   }
-  //https://reactjs.org/docs/composition-vs-inheritance.html
-  //Updating Context from a Nested Component
-  //tentar colocar o metodo depois do render
-  // comparaValores((a,b)=> 
-  //       a>b);
 
   render() {
     return (
@@ -43,19 +42,33 @@ class MyProvider extends Component {
         growAYearOlder: () => this.setState({
           age: this.state.age + 10
         }),
-        changeName: (a,b) => {
-           this.compara(a,b) && this.setState({
-                       name: this.state.name = 'Seu nome Mudou'
-              }
-        )},
-       
-        teste : (e, o) => console.log(e + o)
-         
+        changeName: (name) => {
+          if (this.compara(name)) {
+            this.setState({
+              name: this.state.name = 'vini lindo'
+            })
+          } else {
+            this.setState({
+              name: this.state.name = 'vini lindo'
+            }  
+            }
+        },
+
+        teste: (e, o) => console.log(e + o)
+
       }}>
         {this.props.children}
       </MyContext.Provider>
     )
   }
+
+  compara = (value) => {
+    if (value === 'vini') return true;
+    else if (value !== 'vini') return false;
+  }
+
+
+
 }
 
 const Family = (props) => (
@@ -67,8 +80,8 @@ const Family = (props) => (
 
 class Person extends Component {
 
- 
- 
+
+
   render() {
     return (
       <div className="person">
@@ -78,7 +91,7 @@ class Person extends Component {
               <p>Age: {context.state.age}</p>
               <p>Name: {context.state.name}</p>
               <button onClick={context.growAYearOlder}><span>🍰🍥🎂</span></button><br></br>
-              <button onClick={context.changeName.bind(this,(10,4))}>Mude de nome</button>
+              <button onClick={() => context.changeName('vini')}>Mude de nome</button>
               <a onMouseOver={context.teste('oiiii', ' viniiiii')}> teste de funcao</a>
             </React.Fragment>
           )}
